@@ -1,5 +1,5 @@
 USE codeup_test_db;
-
+TRUNCATE albums;
 SHOW TABLES;
 
 DESCRIBE albums;
