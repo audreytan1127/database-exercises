@@ -1,3 +1,5 @@
+CREATE DATABASE join_test_db;
+USE join_test_db;
 CREATE TABLE roles (
                        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
                        name VARCHAR(100) NOT NULL,
@@ -34,20 +36,24 @@ INSERT INTO users (name, email, role_id) VALUES
                                              ('terry', 'terry@example.com', null);
 
 # LEFT JOIN will get all users, even if they do not have a role assigned to them.
-SELECT users.name AS user_name,
-       roles.name AS role_name
+SELECT *
 FROM users
          LEFT JOIN roles ON users.role_id = roles.id;
 
 # RIGHT JOIN will get all roles, even if there is not a user assigned to it.
-SELECT users.name AS user_name,
-       roles.name AS role_name
+SELECT *
 FROM users
          RIGHT JOIN roles ON users.role_id = roles.id;
 
 # JOIN / INNER JOIN will get the users that are assigned a role.
 # Will not show user or role that are not assigned with its counterpart.
-SELECT users.name AS user_name,
-       roles.name AS role_name
+SELECT *
 FROM users
          JOIN roles ON users.role_id = roles.id;
+
+SELECT roles.name AS Role,
+       COUNT(users.id) AS "Total Users"
+FROM roles
+LEFT JOIN users
+ON roles.id = users.role_id
+GROUP BY roles.name;
