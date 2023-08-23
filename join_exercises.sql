@@ -1,16 +1,18 @@
 USE employees;
 
+
 # Department name and Department Managers
-SELECT d.dept_name AS Department_Name, CONCAT(e.first_name, ' ', e.last_name) AS Department_Manager
+SELECT d.dept_name AS "Department Name", CONCAT(e.first_name, ' ', e.last_name) AS "Department Manager"
 FROM employees as e
          JOIN dept_manager as dm
               ON dm.emp_no = e.emp_no
          JOIN departments as d
               ON d.dept_no = dm.dept_no
-WHERE dm.to_date = '9999-01-01';
+WHERE dm.to_date = '9999-01-01'
+ORDER BY dept_name;
 
 # Department name with ONLY Names of Female Managers
-SELECT d.dept_name AS Department_Name, CONCAT(e.first_name, ' ', e.last_name) AS Department_Manager
+SELECT d.dept_name AS "Department Name", CONCAT(e.first_name, ' ', e.last_name) AS "Department Manager"
 FROM employees as e
          JOIN dept_manager as dm
               ON dm.emp_no = e.emp_no
@@ -21,7 +23,7 @@ WHERE dm.to_date = '9999-01-01'
 
 
 # Get count of each title in Customer Service Department
-SELECT t.title  AS Job_Title,
+SELECT t.title  AS "Job Title",
        COUNT(*) AS Total
 FROM titles AS t
          JOIN dept_emp as de
@@ -33,9 +35,9 @@ GROUP BY t.title;
 
 
 # Find current salary of each department manager
-SELECT d.dept_name AS Department_Name,
-       CONCAT(e.first_name, ' ', e.last_name) AS Department_Manager,
-       s.salary AS Salaries
+SELECT d.dept_name AS "Department Name",
+       CONCAT(e.first_name, ' ', e.last_name) AS "Department Manager",
+       s.salary AS Salary
 FROM employees as e
          JOIN dept_manager dm
               ON dm.emp_no = e.emp_no
